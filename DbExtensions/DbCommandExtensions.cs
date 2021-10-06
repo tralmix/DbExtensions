@@ -6,7 +6,11 @@ namespace System.Data.Common
 {
     public static class DbCommandExtensions
 	{
-
+        ///<summary>
+        /// Will attempt to run <cref>DbCommand.ExecuteReaderAsync()</cref> up to <paramref name="retryAttempts"> times.
+        /// Calls will back off exponentionally at a rate of 2^n up to n=8.
+        ///</summary>
+        ///<param name="retryAttempts">Number of attempts before exception thrown.</param>
 		public static async Task<DbDataReader> ExecuteReaderWithRetryAsync(this DbCommand dbCommand, int retryAttempts)
 		{
 			return await ExecuteReaderWithRetryAsync(dbCommand, retryAttempts, 1);
@@ -22,7 +26,7 @@ namespace System.Data.Common
 			{
 				if (retryAttempts <= 0) throw;
 
-				await Task.Delay(((int)Math.Pow(2, attemptNumber)) * 1000);
+				await Task.Delay(((int)Math.Pow(2, Math.Min(attemptNumber, 8)) * 1000);
 				return await ExecuteReaderWithRetryAsync(dbCommand, retryAttempts--, attemptNumber++);
 			}
 		}
