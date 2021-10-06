@@ -26,7 +26,7 @@ namespace System.Data.Common
 			{
 				if (retryAttempts <= 0) throw;
 
-				await Task.Delay(((int)Math.Pow(2, Math.Min(attemptNumber, 8)) * 1000);
+				await Task.Delay(((int)Math.Pow(2, Math.Min(attemptNumber, 8)) * 1000));
 				return await ExecuteReaderWithRetryAsync(dbCommand, retryAttempts--, attemptNumber++);
 			}
 		}
