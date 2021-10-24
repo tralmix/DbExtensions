@@ -9,6 +9,42 @@ namespace System.Data.Common
 		private static readonly int _firstAttempt = 1;
 		private static readonly int _maxExponent = 8;
 
+		#region Synchronous
+		///<summary>
+		/// Recursively attempts to run <see cref="DbCommand.ExecuteReader()"/> with one retry attempt.
+		///</summary>
+		public static DbDataReader ExecuteReaderWithRetry(this DbCommand dbCommand)
+		{
+			return dbCommand.ExecuteReaderWithRetry(_defaultRetryAttempts, _firstAttempt);
+		}
+
+		///<summary>
+		/// Recursively attempts to run <see cref="DbCommand.ExecuteReader()"/> up to <paramref name="retryAttempts"/> times.
+		/// Calls will back off exponentionally at a rate of 2^n up to n=8.
+		///</summary>
+		///<param name="retryAttempts">Number of attempts before thrown exception is thrown to caller.</param>
+		public static DbDataReader ExecuteReaderWithRetry(this DbCommand dbCommand, int retryAttempts)
+		{
+			return dbCommand.ExecuteReaderWithRetry(retryAttempts, _firstAttempt);
+		}
+
+		private static DbDataReader ExecuteReaderWithRetry(this DbCommand dbCommand, int retryAttempts, int attemptNumber)
+		{
+			try
+			{
+				return dbCommand.ExecuteReader();
+			}
+			catch (Exception)
+			{
+				if (retryAttempts <= 0) throw;
+
+				Thread.Sleep((int)Math.Pow(2, Math.Min(attemptNumber, _maxExponent)) * 1000);
+				return dbCommand.ExecuteReaderWithRetry(retryAttempts--, attemptNumber++);
+			}
+		}
+		#endregion
+
+		#region Async
 		///<summary>
 		/// Recursively attempts to run <see cref="DbCommand.ExecuteReaderAsync()"/> with one retry attempt.
 		///</summary>
@@ -62,5 +98,6 @@ namespace System.Data.Common
 				return await dbCommand.ExecuteReaderWithRetryAsync(retryAttempts--, attemptNumber++, cancellationToken);
 			}
 		}
+		#endregion
 	}
 }
