@@ -1,4 +1,6 @@
-﻿namespace System.Data.Common
+﻿using System.Threading.Tasks;
+
+namespace System.Data.Common
 {
 	public static partial class GetNullables
 	{
@@ -8,11 +10,11 @@
 		/// <param name="columnName">Name of the column.</param>
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
-		public static string GetNullableString (this DbDataReader dbDataReader, string columnName)
+		public static async Task<string> GetNullableStringAsync (this DbDataReader dbDataReader, string columnName)
 		{
 			var ordinal = dbDataReader.GetOrdinal(columnName);
 
-			return dbDataReader.GetNullableString(ordinal);
+			return await dbDataReader.GetNullableStringAsync(ordinal);
 		}
 
 		/// <summary>
@@ -21,9 +23,9 @@
 		/// <param name="ordinal">The zero-based column ordinal.</param>
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
-		public static string GetNullableString(this DbDataReader dbDataReader, int ordinal)
+		public static async Task<string> GetNullableStringAsync(this DbDataReader dbDataReader, int ordinal)
 		{
-			if (dbDataReader.IsDBNull(ordinal)) return null;
+			if (await dbDataReader.IsDBNullAsync(ordinal)) return null;
 
 			return dbDataReader.GetString(ordinal);
 		}
@@ -35,11 +37,11 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static short? GetNullableInt16(this DbDataReader dbDataReader, string columnName)
+		public static async Task<short?> GetNullableInt16Async(this DbDataReader dbDataReader, string columnName)
 		{
 			var ordinal = dbDataReader.GetOrdinal(columnName);
 
-			return dbDataReader.GetNullableInt16(ordinal);
+			return await dbDataReader.GetNullableInt16Async(ordinal);
 		}
 
 		/// <summary>
@@ -49,9 +51,9 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static short? GetNullableInt16(this DbDataReader dbDataReader, int ordinal)
+		public static async Task<short?> GetNullableInt16Async(this DbDataReader dbDataReader, int ordinal)
 		{
-			if (dbDataReader.IsDBNull(ordinal)) return null;
+			if (await dbDataReader.IsDBNullAsync(ordinal)) return null;
 
 			return dbDataReader.GetInt16(ordinal);
 		}
@@ -63,11 +65,11 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static int? GetNullableInt32(this DbDataReader dbDataReader, string columnName)
+		public static async Task<int?> GetNullableInt32Async(this DbDataReader dbDataReader, string columnName)
 		{
 			var ordinal = dbDataReader.GetOrdinal(columnName);
 
-			return dbDataReader.GetNullableInt32(ordinal);
+			return await dbDataReader.GetNullableInt32Async(ordinal);
 		}
 
 		/// <summary>
@@ -77,9 +79,9 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static int? GetNullableInt32(this DbDataReader dbDataReader, int ordinal)
+		public static async Task<int?> GetNullableInt32Async(this DbDataReader dbDataReader, int ordinal)
 		{
-			if (dbDataReader.IsDBNull(ordinal)) return null;
+			if (await dbDataReader.IsDBNullAsync(ordinal)) return null;
 
 			return dbDataReader.GetInt32(ordinal);
 		}
@@ -91,11 +93,11 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static long? GetNullableInt64(this DbDataReader dbDataReader, string columnName)
+		public static async Task<long?> GetNullableInt64Async(this DbDataReader dbDataReader, string columnName)
 		{
 			var ordinal = dbDataReader.GetOrdinal(columnName);
 
-			return dbDataReader.GetNullableInt64(ordinal);
+			return await dbDataReader.GetNullableInt64Async(ordinal);
 		}
 
 		/// <summary>
@@ -105,9 +107,9 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static long? GetNullableInt64(this DbDataReader dbDataReader, int ordinal)
+		public static async Task<long?> GetNullableInt64Async(this DbDataReader dbDataReader, int ordinal)
 		{
-			if (dbDataReader.IsDBNull(ordinal)) return null;
+			if (await dbDataReader.IsDBNullAsync(ordinal)) return null;
 
 			return dbDataReader.GetInt64(ordinal);
 		}
@@ -119,11 +121,11 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static byte? GetNullableByte(this DbDataReader dbDataReader, string columnName)
+		public static async Task<byte?> GetNullableByteAsync(this DbDataReader dbDataReader, string columnName)
 		{
 			var ordinal = dbDataReader.GetOrdinal(columnName);
 
-			return dbDataReader.GetNullableByte(ordinal);
+			return await dbDataReader.GetNullableByteAsync(ordinal);
 		}
 
 		/// <summary>
@@ -133,9 +135,9 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static byte? GetNullableByte(this DbDataReader dbDataReader, int ordinal)
+		public static async Task<byte?> GetNullableByteAsync(this DbDataReader dbDataReader, int ordinal)
 		{
-			if (dbDataReader.IsDBNull(ordinal)) return null;
+			if (await dbDataReader .IsDBNullAsync(ordinal)) return null;
 
 			return dbDataReader.GetByte(ordinal);
 		}
@@ -147,11 +149,11 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static bool? GetNullableBoolean(this DbDataReader dbDataReader, string columnName)
+		public static async Task<bool?> GetNullableBooleanAsync(this DbDataReader dbDataReader, string columnName)
 		{
 			var ordinal = dbDataReader.GetOrdinal(columnName);
 
-			return dbDataReader.GetNullableBoolean(ordinal);
+			return await dbDataReader.GetNullableBooleanAsync(ordinal);
 		}
 
 		/// <summary>
@@ -161,9 +163,9 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static bool? GetNullableBoolean(this DbDataReader dbDataReader, int ordinal)
+		public static async Task<bool?> GetNullableBooleanAsync(this DbDataReader dbDataReader, int ordinal)
 		{
-			if (dbDataReader.IsDBNull(ordinal)) return null;
+			if (await dbDataReader .IsDBNullAsync(ordinal)) return null;
 
 			return dbDataReader.GetBoolean(ordinal);
 		}
@@ -175,11 +177,11 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static char? GetNullableChar(this DbDataReader dbDataReader, string columnName)
+		public static async Task<char?> GetNullableCharAsync(this DbDataReader dbDataReader, string columnName)
 		{
 			var ordinal = dbDataReader.GetOrdinal(columnName);
 
-			return dbDataReader.GetNullableChar(ordinal);
+			return await dbDataReader.GetNullableCharAsync(ordinal);
 		}
 
 		/// <summary>
@@ -189,9 +191,9 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static char? GetNullableChar(this DbDataReader dbDataReader, int ordinal)
+		public static async Task<char?> GetNullableCharAsync(this DbDataReader dbDataReader, int ordinal)
 		{
-			if (dbDataReader.IsDBNull(ordinal)) return null;
+			if (await dbDataReader.IsDBNullAsync(ordinal)) return null;
 
 			return dbDataReader.GetChar(ordinal);
 		}
@@ -203,11 +205,11 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static DateTime? GetNullableDateTime(this DbDataReader dbDataReader, string columnName)
+		public static async Task<DateTime?> GetNullableDateTimeAsync(this DbDataReader dbDataReader, string columnName)
 		{
 			var ordinal = dbDataReader.GetOrdinal(columnName);
 
-			return dbDataReader.GetNullableDateTime(ordinal);
+			return await dbDataReader.GetNullableDateTimeAsync(ordinal);
 		}
 
 		/// <summary>
@@ -217,9 +219,9 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static DateTime? GetNullableDateTime(this DbDataReader dbDataReader, int ordinal)
+		public static async Task<DateTime?> GetNullableDateTimeAsync(this DbDataReader dbDataReader, int ordinal)
 		{
-			if (dbDataReader.IsDBNull(ordinal)) return null;
+			if (await dbDataReader.IsDBNullAsync(ordinal)) return null;
 
 			return dbDataReader.GetDateTime(ordinal);
 		}
@@ -231,11 +233,11 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static decimal? GetNullableDecimal(this DbDataReader dbDataReader, string columnName)
+		public static async Task<decimal?> GetNullableDecimalAsync(this DbDataReader dbDataReader, string columnName)
 		{
 			var ordinal = dbDataReader.GetOrdinal(columnName);
 
-			return dbDataReader.GetNullableDecimal(ordinal);
+			return await dbDataReader.GetNullableDecimalAsync(ordinal);
 		}
 
 		/// <summary>
@@ -245,9 +247,9 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static decimal? GetNullableDecimal(this DbDataReader dbDataReader, int ordinal)
+		public static async Task<decimal?> GetNullableDecimalAsync(this DbDataReader dbDataReader, int ordinal)
 		{
-			if (dbDataReader.IsDBNull(ordinal)) return null;
+			if (await dbDataReader.IsDBNullAsync(ordinal)) return null;
 
 			return dbDataReader.GetDecimal(ordinal);
 		}
@@ -259,11 +261,11 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static double? GetNullableDouble(this DbDataReader dbDataReader, string columnName)
+		public static async Task<double?> GetNullableDoubleAsync(this DbDataReader dbDataReader, string columnName)
 		{
 			var ordinal = dbDataReader.GetOrdinal(columnName);
 
-			return dbDataReader.GetNullableDouble(ordinal);
+			return await dbDataReader.GetNullableDoubleAsync(ordinal);
 		}
 
 		/// <summary>
@@ -273,9 +275,9 @@
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
-		public static double? GetNullableDouble(this DbDataReader dbDataReader, int ordinal)
+		public static async Task<double?> GetNullableDoubleAsync(this DbDataReader dbDataReader, int ordinal)
 		{
-			if (dbDataReader.IsDBNull(ordinal)) return null;
+			if (await dbDataReader.IsDBNullAsync(ordinal)) return null;
 
 			return dbDataReader.GetDouble(ordinal);
 		}
