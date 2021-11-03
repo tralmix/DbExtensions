@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace System.Data.Common
 {
-	public static class DbConnectionExtensions
+	public static class OpenConnectionWithRetry
 	{
 		private static readonly int _defaultRetryAttempts = 1;
 		private static readonly int _firstAttempt = 1;
