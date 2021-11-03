@@ -10,9 +10,9 @@
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
 		public static string GetNullableString (this DbDataReader dbDataReader, string columnName)
 		{
-			var ordinal = dbDataReader.GetOrdinal(columnName);
+			if (dbDataReader.IsDBNull(columnName)) return null;
 
-			return dbDataReader.GetNullableString(ordinal);
+			return dbDataReader.GetString(columnName);
 		}
 
 		/// <summary>
@@ -37,9 +37,9 @@
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
 		public static short? GetNullableInt16(this DbDataReader dbDataReader, string columnName)
 		{
-			var ordinal = dbDataReader.GetOrdinal(columnName);
+			if (dbDataReader.IsDBNull(columnName)) return null;
 
-			return dbDataReader.GetNullableInt16(ordinal);
+			return dbDataReader.GetInt16(columnName);
 		}
 
 		/// <summary>
@@ -65,9 +65,9 @@
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
 		public static int? GetNullableInt32(this DbDataReader dbDataReader, string columnName)
 		{
-			var ordinal = dbDataReader.GetOrdinal(columnName);
+			if (dbDataReader.IsDBNull(columnName)) return null;
 
-			return dbDataReader.GetNullableInt32(ordinal);
+			return dbDataReader.GetInt32(columnName);
 		}
 
 		/// <summary>
@@ -93,9 +93,9 @@
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
 		public static long? GetNullableInt64(this DbDataReader dbDataReader, string columnName)
 		{
-			var ordinal = dbDataReader.GetOrdinal(columnName);
+			if (dbDataReader.IsDBNull(columnName)) return null;
 
-			return dbDataReader.GetNullableInt64(ordinal);
+			return dbDataReader.GetInt64(columnName);
 		}
 
 		/// <summary>
@@ -121,9 +121,9 @@
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
 		public static byte? GetNullableByte(this DbDataReader dbDataReader, string columnName)
 		{
-			var ordinal = dbDataReader.GetOrdinal(columnName);
+			if (dbDataReader.IsDBNull(columnName)) return null;
 
-			return dbDataReader.GetNullableByte(ordinal);
+			return dbDataReader.GetByte(columnName);
 		}
 
 		/// <summary>
@@ -149,9 +149,9 @@
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
 		public static bool? GetNullableBoolean(this DbDataReader dbDataReader, string columnName)
 		{
-			var ordinal = dbDataReader.GetOrdinal(columnName);
+			if (dbDataReader.IsDBNull(columnName)) return null;
 
-			return dbDataReader.GetNullableBoolean(ordinal);
+			return dbDataReader.GetBoolean(columnName);
 		}
 
 		/// <summary>
@@ -177,9 +177,9 @@
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
 		public static char? GetNullableChar(this DbDataReader dbDataReader, string columnName)
 		{
-			var ordinal = dbDataReader.GetOrdinal(columnName);
+			if (dbDataReader.IsDBNull(columnName)) return null;
 
-			return dbDataReader.GetNullableChar(ordinal);
+			return dbDataReader.GetChar(columnName);
 		}
 
 		/// <summary>
@@ -205,9 +205,9 @@
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
 		public static DateTime? GetNullableDateTime(this DbDataReader dbDataReader, string columnName)
 		{
-			var ordinal = dbDataReader.GetOrdinal(columnName);
+			if (dbDataReader.IsDBNull(columnName)) return null;
 
-			return dbDataReader.GetNullableDateTime(ordinal);
+			return dbDataReader.GetDateTime(columnName);
 		}
 
 		/// <summary>
@@ -233,9 +233,9 @@
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
 		public static decimal? GetNullableDecimal(this DbDataReader dbDataReader, string columnName)
 		{
-			var ordinal = dbDataReader.GetOrdinal(columnName);
+			if (dbDataReader.IsDBNull(columnName)) return null;
 
-			return dbDataReader.GetNullableDecimal(ordinal);
+			return dbDataReader.GetDecimal(columnName);
 		}
 
 		/// <summary>
@@ -261,9 +261,9 @@
 		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
 		public static double? GetNullableDouble(this DbDataReader dbDataReader, string columnName)
 		{
-			var ordinal = dbDataReader.GetOrdinal(columnName);
+			if (dbDataReader.IsDBNull(columnName)) return null;
 
-			return dbDataReader.GetNullableDouble(ordinal);
+			return dbDataReader.GetDouble(columnName);
 		}
 
 		/// <summary>
