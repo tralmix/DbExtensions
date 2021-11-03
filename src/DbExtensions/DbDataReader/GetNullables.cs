@@ -8,6 +8,7 @@
 		/// <param name="columnName">Name of the column.</param>
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
+		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
 		public static string GetNullableString (this DbDataReader dbDataReader, string columnName)
 		{
 			if (dbDataReader.IsDBNull(columnName)) return null;
@@ -21,6 +22,7 @@
 		/// <param name="ordinal">The zero-based column ordinal.</param>
 		/// <returns>The nullable value of the specified column.</returns>
 		/// <exception cref="IndexOutOfRangeException">The column index is out of range.</exception>"
+		/// <exception cref="InvalidCastException">The specified cast is not valid.</exception>"
 		public static string GetNullableString(this DbDataReader dbDataReader, int ordinal)
 		{
 			if (dbDataReader.IsDBNull(ordinal)) return null;
