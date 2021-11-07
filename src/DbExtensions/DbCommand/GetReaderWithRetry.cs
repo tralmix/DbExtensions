@@ -51,8 +51,8 @@ namespace System.Data.Common
 		/// Recursively attempts to run <see cref="DbCommand.ExecuteReaderAsync()"/> with one retry attempt.
 		///</summary>
 		///<returns>A System.Data.Common.DbDataReader object.</returns>
-		///<exception cref="System.Data.Common.DbException">An error occurred while executing the command text.</exception>
-		///<exception cref="System.ArgumentException">An invalid System.Data.CommandBehavior value.</exception>
+		///<exception cref="DbException">An error occurred while executing the command text.</exception>
+		///<exception cref="ArgumentException">An invalid System.Data.CommandBehavior value.</exception>
 		public static async Task<DbDataReader> ExecuteReaderWithRetryAsync(this DbCommand dbCommand)
 		{
 			return await dbCommand.ExecuteReaderWithRetryAsync(_defaultRetryAttempts);
@@ -63,8 +63,8 @@ namespace System.Data.Common
 		///</summary>
 		///<param name="cancellationToken">A token to cancel the asynchronous operation.</param>
 		///<returns>A System.Data.Common.DbDataReader object.</returns>
-		///<exception cref="System.Data.Common.DbException">An error occurred while executing the command text.</exception>
-		///<exception cref="System.ArgumentException">An invalid System.Data.CommandBehavior value.</exception>
+		///<exception cref="DbException">An error occurred while executing the command text.</exception>
+		///<exception cref="ArgumentException">An invalid System.Data.CommandBehavior value.</exception>
 		public static async Task<DbDataReader> ExecuteReaderWithRetryAsync(this DbCommand dbCommand, CancellationToken cancellationToken)
 		{
 			return await dbCommand.ExecuteReaderWithRetryAsync(_defaultRetryAttempts, cancellationToken);
@@ -76,8 +76,8 @@ namespace System.Data.Common
 		///</summary>
 		///<param name="retryAttempts">Number of attempts before thrown exception is thrown to caller.</param>
 		///<returns>A System.Data.Common.DbDataReader object.</returns>
-		///<exception cref="System.Data.Common.DbException">An error occurred while executing the command text.</exception>
-		///<exception cref="System.ArgumentException">An invalid System.Data.CommandBehavior value.</exception>
+		///<exception cref="DbException">An error occurred while executing the command text.</exception>
+		///<exception cref="ArgumentException">An invalid System.Data.CommandBehavior value.</exception>
 		public static async Task<DbDataReader> ExecuteReaderWithRetryAsync(this DbCommand dbCommand, int retryAttempts)
 		{
 			return await dbCommand.ExecuteReaderWithRetryAsync(retryAttempts, _firstAttempt);
@@ -90,8 +90,8 @@ namespace System.Data.Common
 		///<param name="retryAttempts">Number of attempts before thrown exception is thrown to caller.</param>
 		///<param name="cancellationToken">A token to cancel the asynchronous operation.</param>
 		///<returns>A System.Data.Common.DbDataReader object.</returns>
-		///<exception cref="System.Data.Common.DbException">An error occurred while executing the command text.</exception>
-		///<exception cref="System.ArgumentException">An invalid System.Data.CommandBehavior value.</exception>
+		///<exception cref="DbException">An error occurred while executing the command text.</exception>
+		///<exception cref="ArgumentException">An invalid System.Data.CommandBehavior value.</exception>
 		public static async Task<DbDataReader> ExecuteReaderWithRetryAsync(this DbCommand dbCommand, int retryAttempts, CancellationToken cancellationToken)
 		{
 			return await dbCommand.ExecuteReaderWithRetryAsync(retryAttempts, _firstAttempt, cancellationToken);
