@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;netstandard1.2;</TargetFrameworks>
+    <PackageId>DbExtensions</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>tralmix</Authors>
+    <RepositoryUrl>https://github.com/tralmix/DbExtensions/</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
