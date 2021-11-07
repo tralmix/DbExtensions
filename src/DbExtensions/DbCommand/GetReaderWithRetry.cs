@@ -40,7 +40,7 @@ namespace System.Data.Common
 			{
 				if (retryAttempts <= 0) throw;
 
-				Thread.Sleep((int)Math.Pow(2, Math.Min(attemptNumber, _maxExponent)) * 1000);
+				Task.Delay(((int)Math.Pow(2, Math.Min(attemptNumber, _maxExponent))) * 1000).Wait();
 				return dbCommand.ExecuteReaderWithRetry(retryAttempts--, attemptNumber++);
 			}
 		}
