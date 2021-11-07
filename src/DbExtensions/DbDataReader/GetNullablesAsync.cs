@@ -23,9 +23,14 @@ namespace System.Data.Common
 		/// </exception>
 		public static async Task<string> GetNullableStringAsync (this DbDataReader dbDataReader, string columnName, CancellationToken cancellationToken = default)
 		{
+#if NET5_0_OR_GREATER
 			if (await dbDataReader.IsDBNullAsync(columnName, cancellationToken: cancellationToken)) return null;
 			
 			return dbDataReader.GetString(columnName);
+#elif NETSTANDARD1_2_OR_GREATER
+			var ordinal = dbDataReader.GetOrdinal(columnName);
+			return await dbDataReader.GetNullableStringAsync(ordinal, cancellationToken);
+#endif
 		}
 
 		/// <summary>
@@ -69,9 +74,14 @@ namespace System.Data.Common
 		/// </exception>
 		public static async Task<short?> GetNullableInt16Async(this DbDataReader dbDataReader, string columnName, CancellationToken cancellationToken = default)
 		{
+#if NET5_0_OR_GREATER
 			if (await dbDataReader.IsDBNullAsync(columnName, cancellationToken: cancellationToken)) return null;
 
 			return dbDataReader.GetInt16(columnName);
+#elif NETSTANDARD1_2_OR_GREATER
+			var ordinal = dbDataReader.GetOrdinal(columnName);
+			return await dbDataReader.GetNullableInt16Async(ordinal, cancellationToken);
+#endif
 		}
 
 		/// <summary>
@@ -115,9 +125,14 @@ namespace System.Data.Common
 		/// </exception>
 		public static async Task<int?> GetNullableInt32Async(this DbDataReader dbDataReader, string columnName, CancellationToken cancellationToken = default)
 		{
+#if NET5_0_OR_GREATER
 			if (await dbDataReader.IsDBNullAsync(columnName, cancellationToken: cancellationToken)) return null;
 
 			return dbDataReader.GetInt32(columnName);
+#elif NETSTANDARD1_2_OR_GREATER
+			var ordinal = dbDataReader.GetOrdinal(columnName);
+			return await dbDataReader.GetNullableInt32Async(ordinal, cancellationToken);
+#endif
 		}
 
 		/// <summary>
@@ -161,9 +176,14 @@ namespace System.Data.Common
 		/// </exception>
 		public static async Task<long?> GetNullableInt64Async(this DbDataReader dbDataReader, string columnName, CancellationToken cancellationToken = default)
 		{
+#if NET5_0_OR_GREATER
 			if (await dbDataReader.IsDBNullAsync(columnName, cancellationToken: cancellationToken)) return null;
 
 			return dbDataReader.GetInt64(columnName);
+#elif NETSTANDARD1_2_OR_GREATER
+			var ordinal = dbDataReader.GetOrdinal(columnName);
+			return await dbDataReader.GetNullableInt64Async(ordinal, cancellationToken);
+#endif
 		}
 
 		/// <summary>
@@ -207,9 +227,14 @@ namespace System.Data.Common
 		/// </exception>
 		public static async Task<byte?> GetNullableByteAsync(this DbDataReader dbDataReader, string columnName, CancellationToken cancellationToken = default)
 		{
+#if NET5_0_OR_GREATER
 			if (await dbDataReader.IsDBNullAsync(columnName, cancellationToken: cancellationToken)) return null;
 
 			return dbDataReader.GetByte(columnName);
+#elif NETSTANDARD1_2_OR_GREATER
+			var ordinal = dbDataReader.GetOrdinal(columnName);
+			return await dbDataReader.GetNullableByteAsync(ordinal, cancellationToken);
+#endif
 		}
 
 		/// <summary>
@@ -253,9 +278,14 @@ namespace System.Data.Common
 		/// </exception>
 		public static async Task<bool?> GetNullableBooleanAsync(this DbDataReader dbDataReader, string columnName, CancellationToken cancellationToken = default)
 		{
+#if NET5_0_OR_GREATER
 			if (await dbDataReader.IsDBNullAsync(columnName, cancellationToken: cancellationToken)) return null;
 
 			return dbDataReader.GetBoolean(columnName);
+#elif NETSTANDARD1_2_OR_GREATER
+			var ordinal = dbDataReader.GetOrdinal(columnName);
+			return await dbDataReader.GetNullableBooleanAsync(ordinal, cancellationToken);
+#endif
 		}
 
 		/// <summary>
@@ -299,9 +329,14 @@ namespace System.Data.Common
 		/// </exception>
 		public static async Task<char?> GetNullableCharAsync(this DbDataReader dbDataReader, string columnName, CancellationToken cancellationToken = default)
 		{
+#if NET5_0_OR_GREATER
 			if (await dbDataReader.IsDBNullAsync(columnName, cancellationToken: cancellationToken)) return null;
 
 			return dbDataReader.GetChar(columnName);
+#elif NETSTANDARD1_2_OR_GREATER
+			var ordinal = dbDataReader.GetOrdinal(columnName);
+			return await dbDataReader.GetNullableCharAsync(ordinal, cancellationToken);
+#endif
 		}
 
 		/// <summary>
@@ -345,9 +380,14 @@ namespace System.Data.Common
 		/// </exception>
 		public static async Task<DateTime?> GetNullableDateTimeAsync(this DbDataReader dbDataReader, string columnName, CancellationToken cancellationToken = default)
 		{
+#if NET5_0_OR_GREATER
 			if (await dbDataReader.IsDBNullAsync(columnName, cancellationToken: cancellationToken)) return null;
 
 			return dbDataReader.GetDateTime(columnName);
+#elif NETSTANDARD1_2_OR_GREATER
+			var ordinal = dbDataReader.GetOrdinal(columnName);
+			return await dbDataReader.GetNullableDateTimeAsync(ordinal, cancellationToken);
+#endif
 		}
 
 		/// <summary>
@@ -391,9 +431,14 @@ namespace System.Data.Common
 		/// </exception>
 		public static async Task<decimal?> GetNullableDecimalAsync(this DbDataReader dbDataReader, string columnName, CancellationToken cancellationToken = default)
 		{
+#if NET5_0_OR_GREATER
 			if (await dbDataReader.IsDBNullAsync(columnName, cancellationToken: cancellationToken)) return null;
 
 			return dbDataReader.GetDecimal(columnName);
+#elif NETSTANDARD1_2_OR_GREATER
+			var ordinal = dbDataReader.GetOrdinal(columnName);
+			return await dbDataReader.GetNullableDecimalAsync(ordinal, cancellationToken);
+#endif
 		}
 
 		/// <summary>
@@ -437,10 +482,14 @@ namespace System.Data.Common
 		/// </exception>
 		public static async Task<double?> GetNullableDoubleAsync(this DbDataReader dbDataReader, string columnName, CancellationToken cancellationToken = default)
 		{
+#if NET5_0_OR_GREATER
 			if (await dbDataReader.IsDBNullAsync(columnName, cancellationToken: cancellationToken)) return null;
 
-
 			return dbDataReader.GetDouble(columnName);
+#elif NETSTANDARD1_2_OR_GREATER
+			var ordinal = dbDataReader.GetOrdinal(columnName);
+			return await dbDataReader.GetNullableDoubleAsync(ordinal, cancellationToken);
+#endif
 		}
 
 		/// <summary>
