@@ -51,7 +51,7 @@ namespace System.Data.Common
 		///<returns>The first column of the first row in the result set.</returns>
 		public static object ExecuteScalarWithRetry(this DbCommand dbCommand)
 		{
-			return dbCommand.ExecuteScalarWithRetry(_defaultRetryAttempts, _firstAttempt);
+			return dbCommand.ExecuteScalarWithRetry(_defaultRetryAttempts);
 		}
 
 		///<summary>
@@ -62,23 +62,21 @@ namespace System.Data.Common
 		///<returns>The first column of the first row in the result set.</returns>
 		public static object ExecuteScalarWithRetry(this DbCommand dbCommand, int retryAttempts)
 		{
-			return dbCommand.ExecuteScalarWithRetry(retryAttempts, _firstAttempt);
-		}
-
-		private static object ExecuteScalarWithRetry(this DbCommand dbCommand, int retryAttempts, int attemptNumber)
-		{
-			try
-			{
-				return dbCommand.ExecuteScalar();
-			}
-			catch (Exception)
-			{
-				if (retryAttempts <= 0) throw;
-
-				Task.Delay(((int)Math.Pow(2, Math.Min(attemptNumber, _maxExponent))) * 1000).Wait();
-				return dbCommand.ExecuteScalarWithRetry(retryAttempts--, attemptNumber++);
-			}
-		}
+            var attempt = _firstAttempt;
+            while (true)
+            {
+                try
+                {
+                    return dbCommand.ExecuteScalar();
+                }
+                catch (Exception)
+                {
+                    Task.Delay(((int)Math.Pow(2, Math.Min(attempt, _maxExponent))) * 1000).Wait();
+                    attempt++;
+                    if (attempt > retryAttempts) throw;
+                }
+            }
+        }
 #endif
         #endregion
 
@@ -174,7 +172,7 @@ namespace System.Data.Common
 		///<exception cref="DbException">An error occurred while executing the command text.</exception>
 		public static async Task<object> ExecuteScalarWithRetryAsync(this DbCommand dbCommand, int retryAttempts)
 		{
-			return await dbCommand.ExecuteScalarWithRetryAsync(retryAttempts, _firstAttempt);
+			return await dbCommand.ExecuteScalarWithRetryAsync(retryAttempts);
 		}
 
 		///<summary>
@@ -186,24 +184,22 @@ namespace System.Data.Common
 		///<returns>The first column of the first row in the result set.</returns>
 		///<exception cref="DbException">An error occurred while executing the command text.</exception>
 		public static async Task<object> ExecuteScalarWithRetryAsync(this DbCommand dbCommand, int retryAttempts, CancellationToken cancellationToken)
-		{
-			return await dbCommand.ExecuteScalarWithRetryAsync(retryAttempts, _firstAttempt, cancellationToken);
-		}
-
-		private static async Task<object> ExecuteScalarWithRetryAsync(this DbCommand dbCommand, int retryAttempts, int attemptNumber, CancellationToken cancellationToken = default)
-		{
-			try
-			{
-				return await dbCommand.ExecuteScalarAsync(cancellationToken);
-			}
-			catch (Exception)
-			{
-				if (retryAttempts <= 0) throw;
-
-				await Task.Delay((int)Math.Pow(2, Math.Min(attemptNumber, _maxExponent)) * 1000, cancellationToken: cancellationToken);
-				return await dbCommand.ExecuteScalarWithRetryAsync(retryAttempts--, attemptNumber++, cancellationToken);
-			}
-		}
+        {
+            var attempt = _firstAttempt;
+            while (true)
+            {
+                try
+                {
+                    return await dbCommand.ExecuteScalarAsync(cancellationToken);
+                }
+                catch (Exception)
+                {
+                    await Task.Delay(((int)Math.Pow(2, Math.Min(attempt, _maxExponent))) * 1000, cancellationToken);
+                    attempt++;
+                    if (attempt > retryAttempts) throw;
+                }
+            }
+        }
 #endif
         #endregion
     }
