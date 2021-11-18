@@ -31,7 +31,6 @@ namespace System.Data.Common
         {
             var attempt = _firstAttempt;
             while (true)
-            {
                 try
                 {
                     return dbCommand.ExecuteScalar();
@@ -42,7 +41,6 @@ namespace System.Data.Common
                     attempt++;
                     if (attempt > retryAttempts) throw;
                 }
-            }
         }
 #elif NETSTANDARD1_2_OR_GREATER
 		///<summary>
@@ -64,7 +62,6 @@ namespace System.Data.Common
 		{
             var attempt = _firstAttempt;
             while (true)
-            {
                 try
                 {
                     return dbCommand.ExecuteScalar();
@@ -75,7 +72,6 @@ namespace System.Data.Common
                     attempt++;
                     if (attempt > retryAttempts) throw;
                 }
-            }
         }
 #endif
         #endregion
@@ -127,7 +123,6 @@ namespace System.Data.Common
         {
             var attempt = _firstAttempt;
             while (true)
-            {
                 try
                 {
                     return await dbCommand.ExecuteScalarAsync(cancellationToken);
@@ -138,7 +133,6 @@ namespace System.Data.Common
                     attempt++;
                     if (attempt > retryAttempts) throw;
                 }
-            }
         }
 #nullable enable
 #elif NETSTANDARD1_2_OR_GREATER
@@ -187,7 +181,6 @@ namespace System.Data.Common
         {
             var attempt = _firstAttempt;
             while (true)
-            {
                 try
                 {
                     return await dbCommand.ExecuteScalarAsync(cancellationToken);
@@ -198,7 +191,6 @@ namespace System.Data.Common
                     attempt++;
                     if (attempt > retryAttempts) throw;
                 }
-            }
         }
 #endif
         #endregion
