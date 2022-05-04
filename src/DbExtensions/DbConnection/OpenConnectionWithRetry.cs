@@ -10,8 +10,9 @@ namespace System.Data.Common
 		private const int _maxExponent = 8;
 
 		/// <summary>
-		/// Recursively attempts to call <see cref="DbConnection.OpenAsync()"/> if connection is not already in <see cref="ConnectionState.Open"/> state
+		/// Attempts to call <see cref="DbConnection.OpenAsync()"/> if connection is not already in <see cref="ConnectionState.Open"/> state
 		/// with <paramref name="retryAttempts"/> retry attempts.
+		/// Calls will back off exponentionally at a rate of 2^n seconds up to n=8, where n is <paramref name="retryAttempts"/>.
 		/// </summary>
 		/// <param name="retryAttempts">Number of times to attempt openning connection before returning thrown error.</param>
 		/// <returns></returns>
@@ -35,8 +36,9 @@ namespace System.Data.Common
 		}
 
 		/// <summary>
-		/// Recursively attempts to call <see cref="DbConnection.OpenAsync()"/> if connection is not already in <see cref="ConnectionState.Open"/> state
+		/// Attempts to call <see cref="DbConnection.OpenAsync()"/> if connection is not already in <see cref="ConnectionState.Open"/> state
 		/// with <paramref name="retryAttempts"/> retry attempts.
+		/// Calls will back off exponentionally at a rate of 2^n seconds up to n=8, where n is <paramref name="retryAttempts"/>.
 		/// </summary>
 		/// <param name="retryAttempts">Number of times to attempt openning connection before returning thrown error.</param>
 		/// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>

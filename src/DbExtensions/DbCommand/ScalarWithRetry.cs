@@ -11,22 +11,14 @@ namespace System.Data.Common
 
 #if NET5_0_OR_GREATER
 #nullable enable
-        ///<summary>
-        /// Attempts to run <see cref="DbCommand.ExecuteScalar()"/> with one retry attempt.
-        ///</summary>
-        ///<returns>The first column of the first row in the result set.</returns>
-        public static object? ExecuteScalarWithRetry(this DbCommand dbCommand)
-        {
-            return dbCommand.ExecuteScalarWithRetry(_defaultRetryAttempts);
-        }
 
         ///<summary>
         /// Attempts to run <see cref="DbCommand.ExecuteScalar()"/> up to <paramref name="retryAttempts"/> times.
-        /// Calls will back off exponentionally at a rate of 2^n up to n=8.
+		/// Calls will back off exponentionally at a rate of 2^n seconds up to n=8, where n is <paramref name="retryAttempts"/>.
         ///</summary>
         ///<param name="retryAttempts">Number of attempts before thrown exception is thrown to caller.</param>
         ///<returns>The first column of the first row in the result set.</returns>
-        public static object? ExecuteScalarWithRetry(this DbCommand dbCommand, int retryAttempts)
+        public static object? ExecuteScalarWithRetry(this DbCommand dbCommand, int retryAttempts = _defaultRetryAttempts)
         {
             var attempt = _firstAttempt;
             while (true)
@@ -44,7 +36,7 @@ namespace System.Data.Common
 
         ///<summary>
         /// Attempts to run <see cref="DbCommand.ExecuteScalarAsync()"/> up to <paramref name="retryAttempts"/> times.
-        /// Calls will back off exponentionally at a rate of 2^n up to n=8.
+		/// Calls will back off exponentionally at a rate of 2^n seconds up to n=8, where n is <paramref name="retryAttempts"/>.
         ///</summary>
         ///<param name="retryAttempts">Number of attempts before thrown exception is thrown to caller.</param>
         ///<param name="cancellationToken">A token to cancel the asynchronous operation.</param>
@@ -67,8 +59,8 @@ namespace System.Data.Common
         }
 #elif NETSTANDARD1_2_OR_GREATER
 		///<summary>
-		/// Recursively attempts to run <see cref="DbCommand.ExecuteScalar()"/> up to <paramref name="retryAttempts"/> times.
-		/// Calls will back off exponentionally at a rate of 2^n up to n=8.
+		/// Attempts to run <see cref="DbCommand.ExecuteScalar()"/> up to <paramref name="retryAttempts"/> times.
+		/// Calls will back off exponentionally at a rate of 2^n seconds up to n=8, where n is <paramref name="retryAttempts"/>.
 		///</summary>
 		///<param name="retryAttempts">Number of attempts before thrown exception is thrown to caller.</param>
 		///<returns>The first column of the first row in the result set.</returns>
@@ -89,8 +81,8 @@ namespace System.Data.Common
         }
 
 		///<summary>
-		/// Recursively attempts to run <see cref="DbCommand.ExecuteScalarAsync()"/> up to <paramref name="retryAttempts"/> times.
-		/// Calls will back off exponentionally at a rate of 2^n up to n=8.
+		/// Attempts to run <see cref="DbCommand.ExecuteScalarAsync()"/> up to <paramref name="retryAttempts"/> times.
+		/// Calls will back off exponentionally at a rate of 2^n seconds up to n=8, where n is <paramref name="retryAttempts"/>.
 		///</summary>
 		///<param name="retryAttempts">Number of attempts before thrown exception is thrown to caller.</param>
 		///<param name="cancellationToken">A token to cancel the asynchronous operation.</param>
