@@ -10,8 +10,8 @@ namespace System.Data.Common
 		private const int _maxExponent = 8;
 
 		///<summary>
-		/// Recursively attempts to run <see cref="DbCommand.ExecuteReader()"/> up to <paramref name="retryAttempts"/> times.
-		/// Calls will back off exponentionally at a rate of 2^n up to n=8.
+		/// Attempts to run <see cref="DbCommand.ExecuteReader()"/> up to <paramref name="retryAttempts"/> times.
+		/// Calls will back off exponentionally at a rate of 2^n seconds up to n=8, where n is <paramref name="retryAttempts"/>.
 		///</summary>
 		///<param name="retryAttempts">Number of attempts before thrown exception is thrown to caller.</param>
 		///<param name="behavior">One of the enumeration values that specified the command behavior.</param>
@@ -35,7 +35,7 @@ namespace System.Data.Common
 
 		///<summary>
 		/// Attempts to run <see cref="DbCommand.ExecuteReaderAsync()"/> up to <paramref name="retryAttempts"/> times.
-		/// Calls will back off exponentionally at a rate of 2^n up to n=8.
+		/// Calls will back off exponentionally at a rate of 2^n seconds up to n=8, where n is <paramref name="retryAttempts"/>.
 		///</summary>
 		///<param name="retryAttempts">Number of attempts before thrown exception is thrown to caller.</param>
 		///<param name="behavior">One of the enumeration values that specified the command behavior.</param>

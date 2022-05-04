@@ -11,7 +11,7 @@ namespace System.Data.Common
 
         ///<summary>
         /// Attempts to run <see cref="DbCommand.ExecuteNonQuery()"/> up to <paramref name="retryAttempts"/> times.
-        /// Calls will back off exponentionally at a rate of 2^n up to n=8.
+		/// Calls will back off exponentionally at a rate of 2^n seconds up to n=8, where n is <paramref name="retryAttempts"/>.
         ///</summary>
         ///<param name="retryAttempts">Number of attempts before thrown exception is thrown to caller.</param>
         ///<returns>The number of rows affected.</returns>
@@ -33,7 +33,7 @@ namespace System.Data.Common
 
         ///<summary>
         /// Attempts to run <see cref="DbCommand.ExecuteNonQueryAsync()"/> up to <paramref name="retryAttempts"/> times.
-        /// Calls will back off exponentionally at a rate of 2^n up to n=8.
+		/// Calls will back off exponentionally at a rate of 2^n seconds up to n=8, where n is <paramref name="retryAttempts"/>.
         ///</summary>
         ///<param name="retryAttempts">Number of attempts before thrown exception is thrown to caller.</param>
         ///<param name="cancellationToken">A token to cancel the asynchronous operation.</param>
